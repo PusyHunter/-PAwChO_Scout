@@ -1,0 +1,21 @@
+FROM node:alpine
+ARG VERSION
+ENV APP_VER=production.${VERSION:-v1.0}
+RUN mkdir -p /var/node
+WORKDIR /var/node
+ADD src ./
+#Critical
+RUN npm install lodash@^4.17.21
+RUN npm install ejs@^3.1.7
+RUN npm install morgan@^1.9.1 
+#ten nie dziala
+RUN npm install json-schema@^0.4.0
+#high
+RUN npm install express@^4.17.3
+RUN npm install mime@^1.4.1
+RUN npm install pug@^3.0.1
+RUN npm install qs@^6.5.3
+
+RUN npm install
+EXPOSE 3000
+ENTRYPOINT [ "./bin/www" ]
